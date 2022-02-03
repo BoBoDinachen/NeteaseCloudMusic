@@ -1,0 +1,5 @@
+.container{
+  background-color: #232326;
+  user-select: none;
+  @apply flex justify-between items-center w-screen shadow-md p-5 z-50 h-28;
+}

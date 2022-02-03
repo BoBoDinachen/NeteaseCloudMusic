@@ -1,0 +1,9 @@
+.container{
+  background-color: rgba(0, 0, 0, 0.3);
+  left: 10px;
+  bottom: 13%;
+  user-select: none;
+  @apply w-2/4 h-24 absolute cursor-move text-white z-50
+  rounded-sm p-3 pb-5
+  flex flex-col justify-between items-center
+}

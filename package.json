@@ -1,0 +1,37 @@
+{
+  "name": "font-end",
+  "version": "0.0.0",
+  "license": "ISC",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@icon-park/react": "^1.3.5",
+    "@types/lyric-parser": "^1.0.2",
+    "ahooks": "^3.1.8",
+    "axios": "^0.24.0",
+    "daisyui": "^1.24.3",
+    "howler": "^2.2.3",
+    "lyric-parser": "^1.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.34.0",
+    "react-router-dom": "^6.0.2",
+    "theme-change": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.4",
+    "@types/node": "^16.11.10",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "@vitejs/plugin-react": "^1.0.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.4",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.3.2",
+    "vite": "^2.7.3",
+    "vite-tsconfig-paths": "^3.3.17"
+  }
+}

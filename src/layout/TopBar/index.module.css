@@ -1,0 +1,25 @@
+/* 顶部栏外观 */
+.topBar{
+  background-color: theme('colors.jet-black');
+  @apply py-4 px-4 flex justify-between items-center z-50
+}
+/* 图标 */
+.log{
+  /* background-image: url(https://s2.music.126.net/style/web2/img/frame/topbar.png?3fedd9b3fc3f0040b729ea2dcda3fd27); */
+  background-image: url(../../assets/images/topbar.png);
+  background-repeat: no-repeat;
+  background-position: 0px -18px;
+  background-size: 250px;
+  @apply w-44 h-9 flex items-center
+}
+/* 导航按钮 */
+.navBtn{
+  @apply btn btn-ghost btn-circle outline-none btn-sm
+}
+/* 搜索框 */
+.searchBox{
+  @apply relative ml-5 flex items-center
+}
+.searchBox input{
+  @apply input h-9 pl-8 
+}

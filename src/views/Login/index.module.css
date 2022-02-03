@@ -1,0 +1,18 @@
+.loginBox {
+  display: none;
+  background-color: #232326;
+  @apply z-50 absolute m-auto left-0 right-0 top-0 bottom-0 h-4/6 w-96 shadow-xl rounded-sm text-black flex-col p-2
+}
+
+.formBox {
+  @apply flex flex-col justify-start p-7 flex-1
+}
+
+/* 每个输入项 */
+.inputItem {
+  @apply flex items-center mb-7
+}
+
+.inputItem input {
+  @apply input h-10  input-bordered w-full pl-8 text-white
+}

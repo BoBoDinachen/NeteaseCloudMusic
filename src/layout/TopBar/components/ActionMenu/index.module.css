@@ -1,0 +1,8 @@
+/* 功能菜单 */
+.menuList{
+  @apply flex space-x-1 flex-1 justify-end
+}
+/* 每个菜单子项 */
+.menuList li{
+  @apply flex justify-center items-center
+}

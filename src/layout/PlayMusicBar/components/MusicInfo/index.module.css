@@ -1,0 +1,39 @@
+.musicAvatarUrl{
+  @apply w-16 h-16 rounded-md object-cover
+}
+/* .musicAvatarUrl:hover{
+  cursor: pointer;
+  filter: blur(1px) brightness(50%);
+} */
+.iconBox{
+  display: block;
+  opacity: 0;
+  cursor: pointer;
+  background: url('../../../../assets/icons/up.svg') no-repeat center;
+  background-size: 25px;
+  @apply absolute z-50 w-16 top-0 h-16
+}
+.musicTitle{
+  @apply w-max leading-5 overflow-hidden
+}
+.musicTitle p{
+  display: inline-block;
+  white-space: nowrap;
+}
+.musicTitle p:hover{
+  cursor: pointer;
+  color: white;
+  animation: 15s wordsLoop linear infinite normal;
+}
+/* 文字滚动动画 */
+@keyframes wordsLoop {
+  0% {
+    transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+  }
+}
