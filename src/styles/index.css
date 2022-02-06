@@ -1,8 +1,24 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,21 +33,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* 字体 */
 @font-face {
   font-family: "Meng Shen";
   src: url("../assets/fonts/萌神手写体.ttf");
 }
+
 @font-face {
   font-family: "Lai Hu";
   src: url("../assets/fonts/濑户字体简体.ttf");
 }
 
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .btn-blue{
-    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
-  }
-}

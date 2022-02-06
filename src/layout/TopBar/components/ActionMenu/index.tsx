@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Platte, Mail, FullScreen, OffScreen, HamburgerButton } from '@icon-park/react';
 // *********************************************导入组件,hooks
 import { useFullscreen } from 'ahooks';
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 import Drawer from '../Drawer/index';
 import avatarUrl from '~/assets/images/profile-pic.png';
 

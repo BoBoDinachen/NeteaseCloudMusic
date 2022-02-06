@@ -2,7 +2,7 @@ import { FunctionComponent, useRef, useState } from "react";
 import { MusicList, VolumeNotice, Share } from '@icon-park/react';
 import { useClickAway, useEventListener } from "ahooks";
 import VolumeControl from './components/VolumeControl/index';
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 
 interface OptionListProps {
 

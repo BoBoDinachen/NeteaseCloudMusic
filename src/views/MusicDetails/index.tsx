@@ -4,7 +4,7 @@ import { FunctionComponent, useEffect, useRef } from "react";
 import TopBar from './components/TopBar/index';
 import MainContent from './components/MainContent/index';
 
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 
 interface MusicDetailsProps {
 

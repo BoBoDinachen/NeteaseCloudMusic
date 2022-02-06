@@ -8,7 +8,7 @@ import {
 import { Howl, Howler } from 'howler';
 import Lyric from 'lyric-parser';
 // *************************************************  导入组件和hooks
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 import Slider from '~/components/Slider/index';
 import { getMusic, getLyric } from '~/services/api/music';
 import { secondToMinute } from '~/utils/BaseUtil';

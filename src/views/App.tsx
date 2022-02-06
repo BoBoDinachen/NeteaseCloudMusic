@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Router } from '~/router/Router';
-import { AppContextProvider } from '~/context/AppContextProvider'
+import { AppContextProvider } from '~/context/AppContext'
 
 function App(): JSX.Element {
   useEffect(() => {

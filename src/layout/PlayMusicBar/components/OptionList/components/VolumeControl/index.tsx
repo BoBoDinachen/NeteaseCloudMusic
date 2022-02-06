@@ -1,7 +1,7 @@
 import { useClickAway, useEventEmitter, useGetState } from "ahooks";
 import { FunctionComponent, useImperativeHandle, useRef, useState } from "react";
 import Slider from '~/components/Slider/index';
-import { useAppContext} from '~/context/AppContextProvider';
+import { useAppContext} from '~/context/AppContext';
 
 interface VolumeControlProps {
   show: boolean,

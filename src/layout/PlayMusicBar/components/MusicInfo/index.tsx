@@ -9,7 +9,7 @@ import { Down, FolderPlus, Like, Download } from '@icon-park/react';
 // *************************************************** 导入组件、hooks
 import { useEventListener, useTitle } from 'ahooks';
 import { getMusicDetail } from '~/services/api/music';
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 
 interface MusicInfoProps {
 
@@ -31,13 +31,14 @@ const MusicInfo: FunctionComponent<MusicInfoProps> = () => {
   useEffect(() => {
     // 获取歌曲详情
     getMusicDetail(state.playSoundId!).then((res: any) => {
-      console.log(res);
+      // console.log(res);
       let info = res.songs[0].al;
       let ar = res.songs[0].ar[0];
       setMusicInfo({ name: res.songs[0].name, picUrl: info.picUrl, artist: ar.name })
     })
   }, [state.playSoundId]);
 
+  // 设置网站标题
   useTitle(musicInfo.name + '-' + musicInfo.artist + '-' + '网易云音乐'); // 设置页面标题
 
   // 鼠标移入事件
@@ -45,6 +46,7 @@ const MusicInfo: FunctionComponent<MusicInfoProps> = () => {
     avatarRef.current!.style.filter = `blur(1px) brightness(50%)`;
     upIconRef.current!.style.opacity = '1';
   }, { target: upIconRef })
+
   // 鼠标移出事件
   useEventListener('mouseout', () => {
     avatarRef.current!.style.filter = 'none';

@@ -4,7 +4,7 @@ import { SettingTwo, Lock, Close } from '@icon-park/react';
 // *************************************** 导入组件和function
 import useBoxDrag from '~/hooks/useBoxDrag';
 import { getLyric } from '~/services/api/music';
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 import { useCreation, useUpdateEffect } from "ahooks";
 
 
@@ -22,9 +22,7 @@ const LyricBox: FunctionComponent<LyricProps> = () => {
   useEffect(() => {
     useBoxDrag(dragRef.current!); // 拖拽元素
     return () => {
-      dragRef.current!.removeEventListener('mousemove', () => { }, false);
-      dragRef.current!.removeEventListener('mousedown', () => { }, false);
-      dragRef.current!.removeEventListener('mouseup', () => { }, false);
+      
     }
   }, [])
 

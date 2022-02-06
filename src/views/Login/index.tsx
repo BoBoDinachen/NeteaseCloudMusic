@@ -7,7 +7,7 @@ import emailIconUrl from '~/assets/images/wyyx-icon.svg';
 // ********************************************************** 图标
 import { Close, Phone, Key } from '@icon-park/react';
 // ********************************************************** 导入组件和hooks
-import { useAppContext } from '~/context/AppContextProvider'
+import { useAppContext } from '~/context/AppContext'
 import { useRequest } from 'ahooks'
 import { cellphoneLogin, getUserDetails } from '~/services/api/user'
 export default function Login() {

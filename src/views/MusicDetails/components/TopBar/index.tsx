@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Down, Left, Right, Search } from '@icon-park/react';
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 
 interface TopBarProps {
 

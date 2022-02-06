@@ -1,6 +1,6 @@
 import { useClickAway } from "ahooks";
 import { FunctionComponent, useRef } from "react";
-import { useAppContext } from '~/context/AppContextProvider';
+import { useAppContext } from '~/context/AppContext';
 
 interface PlayListProps {
   

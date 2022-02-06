@@ -11,10 +11,10 @@ export const Router = () => {
  * 重定向到/app/hello
  */
   if (window.location.pathname === '/') {
-    window.location.pathname = "/app/hello";
+    window.location.pathname = '/app/hello'
   }
   return (
-    <BrowserRouter basename="app">
+    <BrowserRouter basename="/app" >
       <InnerRouter />
     </BrowserRouter>
   )

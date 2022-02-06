@@ -24,6 +24,8 @@ function getLyric(id:number) {
 function getMusicDetail(id:number) {
   return get('/song/detail', {ids:id})
 }
+
+
 export {
   getMusic,
   getLyric,

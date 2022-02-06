@@ -1,13 +1,16 @@
 import { Dispatch } from "react";
 
+
 interface stateType {
   showLoginBox?: boolean, // 显示登录盒子
   showPlayList?: boolean, // 显示当前播放列表
   showMusicDetails?: boolean, // 显示当前音乐的详情页
+  showSearchWindow?: boolean, // 显示搜索窗口
   showLyric?: boolean, // 显示歌词
   playSoundId: number, // 当前播放的音乐id
   currentVolume: number, // 当前音量
   currentLyric: string, // 当前歌词
+  searchWords: string // 当前搜索关键词
 }
 /**
  * 全局状态
@@ -16,10 +19,12 @@ const initialState: stateType = {
   showLoginBox: false,
   showPlayList: false,
   showMusicDetails: false,
+  showSearchWindow: false,
   showLyric: false,
   playSoundId: 1901371647,
   currentVolume: 70,
-  currentLyric: '歌词'
+  currentLyric: '歌词',
+  searchWords: ''
 };
 
 /**
@@ -39,10 +44,12 @@ type ACTIONTYPE =
   | { type: 'setShowLoginBox'; payload: boolean }
   | { type: 'setShowPlayList'; payload: boolean }
   | { type: 'setShowMusicDetails'; payload: boolean }
+  | { type: 'setShowSearchWindow'; payload: boolean }
   | { type: 'setShowLyric'; payload: boolean }
   | { type: 'setPlaySoundId'; playload: number }
   | { type: 'setCurrentVolume'; playload: number }
   | { type: 'setCurrentLyric'; playload: string }
+  | { type: 'setSearchWords'; playload: string }
   | { type: 'initial' };
 
 /**
@@ -68,6 +75,11 @@ function reducer(state: stateType, action: ACTIONTYPE) {
         ...state,
         showMusicDetails: action.payload
       }
+    case 'setShowSearchWindow':
+      return {
+        ...state,
+        showSearchWindow: action.payload
+      }
     case 'setShowLyric':
       return {
         ...state,
@@ -87,6 +99,11 @@ function reducer(state: stateType, action: ACTIONTYPE) {
       return {
         ...state,
         currentLyric: action.playload
+      }
+    case 'setSearchWords':
+      return {
+        ...state,
+        searchWords: action.playload
       }
     default:
       throw new Error();

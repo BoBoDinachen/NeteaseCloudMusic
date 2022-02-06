@@ -1,13 +1,47 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import styles from './index.module.css'
 import { Right, Left, Search } from '@icon-park/react'
-// *******************************************************导入组件
+// *******************************************************导入组件和hooks
 import ActionMenu from './components/ActionMenu/index';
+import { useAppContext } from '~/context/AppContext';
+import { getDefaultSearchKeywords } from '~/services/api/search';
+import { useDebounce, useDebounceFn } from 'ahooks';
 
 interface TopBarProps {
 
 }
 const TopBar: FunctionComponent<TopBarProps> = () => {
+
+  const { state, dispatch } = useAppContext();
+  const [searchSuggest, setSearchSuggest] = useState<string>(''); // 搜索建议
+  const [inputValue, setInputValue] = useState<string>(''); // 输入值
+  /**
+   * 加载默认搜索关键词
+   */
+  useEffect(() => {
+    getDefaultSearchKeywords().then((res: any) => {
+      // console.log(res);
+      setSearchSuggest(res.data.showKeyword);
+    })
+  }, [])
+  
+  /**
+   * 输入数据,防抖函数
+   */
+   const { run } = useDebounceFn(
+     () => {
+      dispatch({ type: 'setSearchWords', playload: inputValue })
+    },
+    {
+      wait: 500,
+    },
+  );
+
+  const handleChangeSearch = (e: any) => {
+    setInputValue(e.target.value);
+    run(); // 防抖函数
+  }
+
   return (
     <div className={`${styles.topBar}`}>
       {/* 图标 */}
@@ -27,7 +61,7 @@ const TopBar: FunctionComponent<TopBarProps> = () => {
         </div>
         {/* 搜索框 */}
         <div className={styles.searchBox}>
-          <input type="text" placeholder="搜索音乐"></input>
+          <input type="text" onChange={(e:any) => {handleChangeSearch(e) }} value={inputValue} placeholder={ searchSuggest} autoComplete="off" id='search-input' onFocus={() => { dispatch({ type: 'setShowSearchWindow', payload: true }) }}></input>
           <Search className="absolute ml-2" theme="outline" size="20" fill="#d4d1d0" />
         </div>
       </div>
