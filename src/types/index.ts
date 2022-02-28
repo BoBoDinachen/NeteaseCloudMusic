@@ -20,7 +20,7 @@ interface ArtistType {
 /**
  * 专辑类型
  */
-interface Albums{
+interface Albums {
   id: number // 专辑id
   name: string // 专辑名字
   artist: ArtistType // 专辑的歌手
@@ -35,8 +35,17 @@ interface SearchSuggestType {
   albums: Albums[] // 专辑列表
 }
 
+/**
+ * 歌单类型
+ */
+interface SongMenuType {
+  id: number, // id
+  picUrl: string, // 歌单封面
+  name: string, // 歌单名称
+  playCount: number // 播放数量
+}
 export type {
   SongType,
-  SearchSuggestType
-  
+  SearchSuggestType,
+  SongMenuType
 }

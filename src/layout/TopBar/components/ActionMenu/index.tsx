@@ -6,7 +6,6 @@ import { Platte, Mail, FullScreen, OffScreen, HamburgerButton } from '@icon-park
 // *********************************************导入组件,hooks
 import { useFullscreen } from 'ahooks';
 import { useAppContext } from '~/context/AppContext';
-import Drawer from '../Drawer/index';
 import avatarUrl from '~/assets/images/profile-pic.png';
 
 interface ActionMenuProps {
@@ -14,8 +13,7 @@ interface ActionMenuProps {
 }
 
 const ActionMenu: FunctionComponent<ActionMenuProps> = () => {
-  const [showDrawer, setShowDrawer] = useState(false);
-  const [isLogin, setIsLogin] = useState(false); // 是否登录
+  const [isLogin, setIsLogin] = useState(true); // 是否登录
   const { dispatch } = useAppContext();
   // *******************************************************
   const navigate = useNavigate();
@@ -77,14 +75,12 @@ const ActionMenu: FunctionComponent<ActionMenuProps> = () => {
       <li>
         {
           isLogin ?
-            <button className="btn btn-ghost btn-sm rounded-btn" onClick={() => { setShowDrawer(true) }}>
+            <button className="btn btn-ghost btn-sm rounded-btn" onClick={() => { dispatch({ type: 'setShowDrawer', payload: true }) }}>
               <HamburgerButton theme="outline" size="28" fill="#fff" />
             </button>
             : <></>
         }
       </li>
-      {/* 抽屉 */}
-      <Drawer isShow={showDrawer} setShowDrawer={setShowDrawer}></Drawer>
     </ul>
   );
 }

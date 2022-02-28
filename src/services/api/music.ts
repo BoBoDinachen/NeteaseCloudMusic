@@ -1,7 +1,7 @@
 import { post, get } from '../index';
 
 /**
- * 获取音乐
+ * 获取音乐url
  * @param id 音乐id
  */
 function getMusic(id: number) {

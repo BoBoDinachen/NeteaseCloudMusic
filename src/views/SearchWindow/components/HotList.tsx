@@ -22,7 +22,7 @@ const HotList: FunctionComponent<HotListProps> = () => {
    */
   useEffect(() => {
     getHotSearchDetailsList().then((res: any) => {
-      console.log(res);
+      // console.log(res);
       setHotListData(res.data)
     })
   }, [])
@@ -40,7 +40,7 @@ const HotList: FunctionComponent<HotListProps> = () => {
                   <div className='flex items-center space-x-3'>
                     <span className='text-sm'>{data.searchWord}</span>
                     <span className='text-2xs text-gray-500'>{data.score}</span>
-                    <img src={data.iconUrl ? data.iconUrl : ''} className={`${data.iconType === 1 ? 'w-6' : (data.iconType === 5 ? 'w-3' : '')}`} alt="" />
+                    <img src={data.iconUrl ? data.iconUrl : ''} className={`${data.iconType === 1 ? 'w-6' : (data.iconType === 5 ? 'w-3' : 'w-6')}`} alt="" />
                   </div>
                   <span className='text-2xs w-64 truncate text-gray-500 mt-1'>{ data.content}</span>
                 </div>

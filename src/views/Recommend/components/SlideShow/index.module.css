@@ -1,0 +1,80 @@
+.slide {
+  position: absolute;
+  transition: all 0.5s ease-in-out;
+  /* // 禁止用户选中(防止图片被选中时变色); */
+  user-select: none;
+  @apply h-40 flex justify-center items-center
+}
+
+.slide :hover {
+  cursor: pointer;
+}
+.slide span{
+  border-radius: 20% 0 20% 0;
+}
+
+/* // 蒙板，有个灰度渐变的效果 */
+.masking {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .15);
+  transition: all 0.5s 0.2s linear;
+}
+
+/*  // 此为中间展示的那张 */
+.middle {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  z-index: 33;
+}
+
+/* // 第一张则为左侧那张 */
+.start {
+  left: 5%;
+  bottom: 0%;
+  width: 35%;
+  z-index: 22;
+}
+
+/* // 最后一张及右侧那张 */
+.end {
+  right: 5%;
+  bottom: 0%;
+  width: 35%;
+  z-index: 22;
+}
+
+/* // 此为隐藏图片的样式 */
+.normal {
+  left: 13%;
+  bottom: 0%;
+  width: 35%;
+  z-index: 11;
+}
+
+.point {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -40px;
+  z-index: 40;
+  text-align: center;
+}
+.point span {
+  display: inline-block;
+  width: 20px;
+  height: 3px;
+  /* background-color: #2E3033; */
+  margin-left: 9px;
+}
+.hover {
+  /* background-color: #7F8082; */
+  background-color: white;
+}
+.point span:hover {
+  cursor: pointer;
+}

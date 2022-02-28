@@ -3,7 +3,8 @@ import {
   useGetState,
   useToggle,
   useCreation,
-  useUpdateEffect
+  useUpdateEffect,
+  useCounter
 } from 'ahooks';
 import { Howl, Howler } from 'howler';
 import Lyric from 'lyric-parser';
@@ -31,6 +32,7 @@ const MusicControl: FunctionComponent<MusicControlProps> = () => {
   const timer = useRef<any>(null);
   const [lastSeconds, setLastSeconds, getLastSeconds] = useGetState<number>(0); // 滚动条最后一次抬起的值
 
+
   // 常量 --- 音乐对象
   const sound = useMemo(() => new Howl({
     src: [musicUrl],
@@ -50,12 +52,12 @@ const MusicControl: FunctionComponent<MusicControlProps> = () => {
       console.log("音乐结束...");
       setLeft(); // 暂停
       setSeconds(0);
-      dispatch({type:'setCurrentLyric',playload:'— — 终 — —'})
+      dispatch({ type: 'setCurrentLyric', playload: '— — 终 — —' })
       clearInterval(timer.current); // 清除计时器
       timer.current = null;
     }
   }), [musicUrl]);
-  // 常量 --- 歌词对象
+  //  --- 歌词对象
   const lyric = useCreation(() => new Lyric(lyricStr, (props: { lineNum: any, txt: any }) => {
     // console.log(props.lineNum, props.txt);
     dispatch({ type: 'setCurrentLyric', playload: props.txt }); // 设置当前的歌词
@@ -84,17 +86,23 @@ const MusicControl: FunctionComponent<MusicControlProps> = () => {
    * 加载音乐url和歌词数据
    */
   useEffect(() => {
+    setLeft(); // 切换停止按钮
+    lyric.stop(); // 停止歌词
     // 获取歌曲的url
     getMusic(state.playSoundId!).then((res: any) => {
-      setMusicUrl(res.data[0].url);
+      setMusicUrl(res.data[0].url); 
     })
     // 获取歌词数据
     getLyric(state.playSoundId!).then((res: any) => {
+      lyric.stop(); // 停止歌词
       setLyricStr(res.lrc.lyric);
     })
     return () => {
       sound.unload(); // 清除当前的音乐对象
+      lyric.stop(); // 停止歌词
       setSeconds(0); // 进度条重置
+      clearInterval(timer.current); // 清除计时器
+      timer.current = null;
     }
   }, [state.playSoundId])
 
@@ -103,23 +111,31 @@ const MusicControl: FunctionComponent<MusicControlProps> = () => {
    */
   useEffect(() => {
     if (sound !== null && lyric !== null) {
-      // handlePlay(); // 开始播放音乐和歌词
+      // handlePlay(); // 播放音乐
+      if (state.autoPlay) {
+        handlePlay();
+      }
     }
     return () => {
       sound.unload(); // 清除当前的音乐对象
+      setSeconds(0); // 进度条重置
       clearInterval(timer.current); // 清除计时器
       timer.current = null;
     }
   }, [musicUrl])
+
+  useEffect(() => {
+    handlePause();
+  }, [])
 
   /**
    * 点击播放
    */
   const handlePlay = () => {
     if (sound !== null && lyric !== null) {
+      setRight(); // 切换状态
       sound.play(); // 音乐播放
       lyric.play(getSeconds() * 1000); // 歌词播放 
-      setRight(); // 切换状态
       // 计时器开始
       if (timer.current == null) {
         timer.current = setInterval(() => {
@@ -135,9 +151,9 @@ const MusicControl: FunctionComponent<MusicControlProps> = () => {
    */
   const handlePause = () => {
     if (sound !== null && lyric !== null) {
+      setLeft(); // 切换状态
       sound.pause(); // 音乐暂停
       lyric.togglePlay(); // 歌词暂停
-      setLeft(); // 切换状态
       // 清除计时器
       clearInterval(timer.current);
       timer.current = null;

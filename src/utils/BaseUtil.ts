@@ -17,5 +17,24 @@ function secondToMinute(second:number){
   s  =   (s.length==1)?'0'+s:s;
   return h+':'+s;
 }
+/**
+ * 对数值进行单位转换
+ * @param num 数值
+ * @returns 
+ */
+const unitConverter = (num: number) => {
+  if (!num || isNaN(num)) {
+    return '请传入数值格式的数据'
+  }
+  // 此处为防止字符串形式的数值进来，因为toFixed方法只能用于数值型数
+  num = Number(num)
+  if (Math.abs(num) > 100000000) {
+    return (num / 100000000).toFixed(2) + '亿'
+  } else if (Math.abs(num) > 10000) {
+    return (num / 10000).toFixed(2) + '万'
+  } else {
+    return num.toFixed(2)
+  }
+}
 
-export { secondToMinute}
+export { secondToMinute,unitConverter}

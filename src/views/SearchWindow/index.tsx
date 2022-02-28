@@ -38,8 +38,8 @@ const SearchWindow: FunctionComponent<SearchWindowProps> = () => {
   
   return (
     <div className='
-      absolute left-56 top-1 w-1/5 h-5/6 bg-gray-800
-      rounded-md p-5 overflow-y-scroll
+      absolute left-60 top-1 w-1/5 h-5/6 bg-gray-800
+      rounded-md p-5 overflow-y-scroll z-50 overflow-hidden
     ' style={{ display: `${state.showSearchWindow?'flex':'none'}` }} ref={searchRef}>
       {
         isToggle === false && <HotList></HotList>
