@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import React,{ FunctionComponent,Suspense } from 'react';
 import { useAppContext } from '~/context/AppContext';
 import TopBar from '~/layout/TopBar/index';
 import Main from '~/layout/Main/index';
@@ -10,6 +10,8 @@ import PlayList from '~/views/PlayList/index'; // 当前的播放列表
 import LyricBox from '~/views/LyricBox/index'; // 歌词容器
 import Drawer from './TopBar/components/Drawer/index';
 import { Outlet } from 'react-router-dom';
+import Loading from '~/components/Loading';
+
 interface LayoutProps {
 
 }
@@ -22,7 +24,9 @@ const Layout: FunctionComponent<LayoutProps> = () => {
       <Main>
         <SideBar />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <Outlet></Outlet>
+          <Suspense fallback={<Loading/>}>
+            <Outlet></Outlet>
+          </Suspense>
         </div>
       </Main>
       {/* 登录窗口 */}

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Router } from '~/router/Router';
 import { AppContextProvider } from '~/context/AppContext'
 import {
-  
   QueryClient,
   QueryClientProvider,
 } from 'react-query'

@@ -37,8 +37,8 @@ const Drawer: FunctionComponent<DrawerProps> = (props) => {
     }
   ]);
 
-  let timer1: any;
-  let timer2: any;
+  let timer1: any = useRef();
+  let timer2: any = useRef();
 
   useEffect(() => {
     if (props.isShow) {
@@ -58,6 +58,7 @@ const Drawer: FunctionComponent<DrawerProps> = (props) => {
     drawerRef.current!.style.transform = `translateX(${drawerWidth}px)`;
     timer1 = setTimeout(() => {
       setShowShade(false);
+      drawerRef.current!.style.display = `none`;
     }, 400)
   }
 

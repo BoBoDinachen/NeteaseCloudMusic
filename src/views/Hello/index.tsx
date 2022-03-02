@@ -13,9 +13,10 @@ const Hello: FunctionComponent<HelloProps> = () => {
     //   console.log(res);
 
     // })
-    getBanner({ type: 0 }).then((res: any) => {
-      console.log(res);
-    })
+    // getBanner({ type: 0 }).then((res: any) => {
+    //   console.log(res);
+    // })
+
   }, [])
 
   return (

@@ -69,7 +69,5 @@ const InnerRouter = () => {
   ]
   const element = useRoutes(routes);
 
-  return (
-    <Suspense fallback={<Loading />}>{element}</Suspense>
-  )
+  return element
 }

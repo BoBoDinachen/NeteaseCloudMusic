@@ -2,7 +2,7 @@ import axios, { Method } from 'axios';
 
 // 环境的切换
 if (import.meta.env.DEV) {
-  axios.defaults.baseURL = 'http://localhost:3000';
+  axios.defaults.baseURL = 'http://localhost:3000/';
 } else if (import.meta.env.PROD) {
   axios.defaults.baseURL = '';
 }

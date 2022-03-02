@@ -14,6 +14,29 @@ function getRecommendSongList() {
 function getPersonalized(params: {limit: number}) {
   return get("/personalized", {...params});
 }
+
+/**
+ * 获取推荐MV
+ * @returns 
+ */
+function getRecommendMV() {
+  return get('/personalized/mv', {});
+}
+
+/**
+ * 获取推荐新音乐
+ * @returns 
+ */
+function getRecommendNewSong() {
+  return get('/personalized/newsong', {})
+}
+
+/**
+ * 获取独家放送
+ */
+function getPrivateContent(){
+  return get('/personalized/privatecontent', {})
+}
 /**
  * 获取轮播图数据
  * 0: pc
@@ -28,5 +51,8 @@ function getBanner(params: { type: 0|1|2|3}) {
 export {
   getRecommendSongList,
   getPersonalized,
-  getBanner
+  getBanner,
+  getRecommendMV,
+  getRecommendNewSong,
+  getPrivateContent
 }
