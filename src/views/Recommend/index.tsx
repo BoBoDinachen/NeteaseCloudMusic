@@ -1,14 +1,15 @@
 import { FunctionComponent, useEffect, useState, memo } from "react";
 import { getPersonalized, getBanner, getPrivateContent, getRecommendNewSong, getRecommendMV } from '~/services/api/recommend';
-import { Right } from '@icon-park/react';
+import { Right, TopBar } from '@icon-park/react';
 import { useQuery } from 'react-query';
 import { SongMenuType } from '~/types/index';
 // ********************************************** 组件和hooks
 import SlideShow from './components/SlideShow';
 import PrivateContentItem from './components/PrivateContentItem';
 import NewSongItem from './components/NewSongItem';
-import SongMenuItem from './components/SongMenuItem'; // 歌单
+import SongMenuItem from '~/components/SongMenuItem'; // 歌单
 import MvItem from './components/MvItem';
+import TitleBar from './components/TitleBar/index';
 import { useRequest } from 'ahooks';
 
 interface RecommendProps {
@@ -45,6 +46,8 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
   const { isSuccess, data: songMenuList, status } = useQuery(['songMenuList'], async () => {
     const response: any = await getPersonalized({ limit: 10 })
     // setSongMenuList(response.result)
+    console.log(response);
+    
     return response;
   })
 
@@ -132,10 +135,7 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
       {/* 轮播图 */}
       <SlideShow imgUrlList={bannerUrlList!} dir={dir} setDir={setDir}></SlideShow>
       {/* 推荐歌单 */}
-      <div className='mt-16 flex w-full items-center'>
-        <span className='text-xl font-bold'>推荐歌单</span>
-        <Right theme="outline" size="24" fill="#ffffff" />
-      </div>
+      <TitleBar title='推荐歌单'/>
       {
         status === 'loading' ? (
           <div>Loading...</div>
@@ -152,10 +152,7 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
         )
       }
       {/* 独家放送 */}
-      <div className='mt-12 flex w-full items-center'>
-        <span className='text-xl font-bold'>独家放送</span>
-        <Right theme="outline" size="24" fill="#ffffff" />
-      </div>
+      <TitleBar title='独家放送'/>
       <ul className='mt-5 flex justify-between items-center space-x-4'>
         {
           privateContent.map((item, index) => {
@@ -164,10 +161,7 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
         }
       </ul>
       {/* 最新音乐 */}
-      <div className='mt-10 flex w-full items-center'>
-        <span className='text-xl font-bold'>最新音乐</span>
-        <Right theme="outline" size="24" fill="#ffffff" />
-      </div>
+      <TitleBar title='最新音乐'/>
       <ul className='w-full mt-5 grid grid-cols-3 gap-x-12 gap-y-6'>
         {
           newSongList.map((item, index) => {
@@ -178,10 +172,7 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
         }
       </ul>
       {/* 推荐MV */}
-      <div className='mt-10 flex w-full items-center'>
-        <span className='text-xl font-bold'>推荐MV</span>
-        <Right theme="outline" size="24" fill="#ffffff" />
-      </div>
+      <TitleBar title='推荐MV'/>
       <ul className='w-full mt-5 flex justify-between items-center space-x-5'>
         {
           recommendMVList.map((item, index) => {

@@ -40,9 +40,15 @@ interface SearchSuggestType {
  */
 interface SongMenuType {
   id: number, // id
-  picUrl: string, // 歌单封面
+  picUrl?: string, // 歌单封面
+  coverImgUrl?:string //歌单封面
   name: string, // 歌单名称
   playCount: number // 播放数量
+  creator?: {
+    userId: number// 创建者id
+    nickname: string // 创建者名字
+    avatarUrl:string // 创建者头像
+  }
 }
 export type {
   SongType,

@@ -9,6 +9,59 @@ function getSongListAllMusic(params: { id: number, limit?: number, offset?: numb
   return get('/playlist/track/all', { ...params })
 }
 
+/**
+ * 获取歌单分类 
+ * category:
+ * 0 --语种
+ * 1 --风格
+ * 2 --场景
+ * 3 --情感
+ * 4 --主题
+ * @returns 
+ */
+function getSongCatlist() {
+  return get('/playlist/catlist', {})
+}
+
+/**
+ * 获取热门歌单分类
+ * @returns 
+ */
+function getHotSongCatlist() {
+  return get('/playlist/hot', {})
+}
+
+/**
+ * 获取歌单列表
+ * @param params 
+ * cat -tag, 比如 " 华语 "、" 古风 " 、" 欧美 "、" 流行 ", 默认为 "全部",
+ * @returns 
+ */
+function getSongList(params: {order?: 'new'|'hot',cat:string,limit:number,offset?:number}) {
+  return get('/top/playlist', {...params})
+}
+
+/**
+ * 获取精品歌单标签列表
+ */
+function getBoutiquePlaylistTags() {
+  return get('/playlist/highquality/tags', {})
+}
+
+/**
+ * 获取精品歌单
+ * @param params 
+ * @returns 
+ */
+function getBoutiquePlaylist(params: {cat:string,limit: number,before?:number}) {
+  return get('/top/playlist/highquality', { ...params });
+}
+
 export {
-  getSongListAllMusic
+  getSongListAllMusic,
+  getSongCatlist,
+  getHotSongCatlist,
+  getBoutiquePlaylistTags,
+  getBoutiquePlaylist,
+  getSongList
 }

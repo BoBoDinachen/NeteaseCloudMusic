@@ -24,12 +24,12 @@ const NewSongItem: FunctionComponent<NewSongItemProps> = (props) => {
         </button>
       </div>
       {/* 右边部分 */}
-      <div className='flex flex-col justify-between ml-3 h-full py-1'>
-        <div className='text-sm'>
-          <span>{props.songItem.name}</span>
-          <span className='truncate'>{props.songItem.alias?`(${props.songItem.alias})`:''}</span>
+      <div className='flex flex-col justify-between ml-3 py-1 space-y-2'>
+        <div className='text-xs'>
+          <span className='truncate w-max'>{props.songItem.name}</span>
+          <span className='truncate ml-1 text-gray-400'>{props.songItem.alias?`(${props.songItem.alias})`:''}</span>
         </div>
-        <span className='text-sm text-gray-400'>{props.songItem.singer}</span>
+        <span className='text-xs text-gray-400'>{props.songItem.singer}</span>
       </div>
     </li>
   );
