@@ -5,14 +5,16 @@ import { SongMenuType } from '~/types/index';
 import { getHotSongCatlist, getBoutiquePlaylist, getSongList } from '~/services/api/songList';
 import BoutiqueCover from './components/BoutiqueCover/index';
 import TabBar from './components/TabBar/index';
-import TagListBox from './components/TagListBox/index';
+import Loading from '~/components/Loading/index';
 import SongMenuItem from '~/components/SongMenuItem/index';
+import PagingToolbar from './components/PagingToolbar/index';
 import { useClickAway, useUpdateEffect } from "ahooks";
 interface SongMenuListProps {
 
 }
 
 const SongMenuList: FunctionComponent<SongMenuListProps> = () => {
+
   const [hotSongCatlist, setHotSongCatlist] = useState<{ id: number, name: string }[]>([]);
   const [activeTag, setActiveTag] = useState<string>(''); // 当前活动的标签
   const [activeBoutiqueCover, setActiveBoutiqueCover] = useState<{ name: string, coverImgUrl: string, text: string }>({
@@ -21,8 +23,10 @@ const SongMenuList: FunctionComponent<SongMenuListProps> = () => {
     text: ''
   }); // 精品歌单封面
   const [songList, setSongList] = useState<SongMenuType[]>([]); // 歌单列表
+  const [isLoading, setIsLoading] = useState<boolean>(false); // 是否加载
+  const [activePageNumber, setActivePageNumber] = useState<number>(0); // 当前页数
+  const scrollBoxRef = useRef<HTMLDivElement>(null!);
 
- 
   /**
    * 加载数据
    */
@@ -47,9 +51,10 @@ const SongMenuList: FunctionComponent<SongMenuListProps> = () => {
   }, [])
 
   /**
-   * 加载精品歌单封面
+   * 加载精品歌单封面和歌单列表
    */
   useUpdateEffect(() => {
+    setActivePageNumber(0);
     // 获取精品歌单
     getBoutiquePlaylist({ cat: activeTag, limit: 1 }).then((res: any) => {
       // console.log(res);
@@ -68,31 +73,46 @@ const SongMenuList: FunctionComponent<SongMenuListProps> = () => {
         })
       }
     })
-    // 加载歌单列表
-    getSongList({ cat: activeTag, limit: 100, order: 'hot', offset: 1 }).then((res: any) => {
-      console.log(res);
-      setSongList(res.playlists);
-    })
+
   }, [activeTag])
 
-  
+  /**
+   * 当标签和页数发生变化时，加载歌单列表
+   */
+  useEffect(() => {
+    setIsLoading(true);
+    scrollBoxRef.current.scrollTop = 0;
+    // 加载歌单列表
+    getSongList({ cat: activeTag, limit: 100, order: 'hot', offset: activePageNumber * 100 }).then((res: any) => {
+      console.log(res);
+      if (res.code === 200) {
+        setSongList(res.playlists);
+        setIsLoading(false);
+      }
+    })
+  }, [activeTag, activePageNumber])
 
   return (
-    <div className='w-full h-full px-20 pb-10 pt-5 overflow-hidden overflow-y-scroll'>
+    <div ref={scrollBoxRef} className='w-full h-full px-20 pb-10 pt-5 overflow-hidden overflow-y-scroll'>
       {/* 精品歌单封面 */}
       <BoutiqueCover boutiqueCover={activeBoutiqueCover} />
       {/* 歌单标签栏 */}
       <TabBar hotSongCatlist={hotSongCatlist} setActiveTag={setActiveTag} tagName={activeTag} />
       {/* 歌单列表 */}
-      <ul className='w-full mt-5 grid grid-cols-5 gap-x-12 gap-y-5'>
+      <ul className='relative w-full mt-5 grid grid-cols-5 gap-x-12 gap-y-5'>
         {
-          songList.map((item, index) => {
-            return (
-              <SongMenuItem key={item.id} menuItem={item} />
-            )
-          })
+          isLoading ? <Loading /> :
+            songList.map((item, index) => {
+              return (
+                <SongMenuItem key={item.id} menuItem={item} />
+              )
+            })
         }
       </ul>
+      {/* 分页栏 */}
+      {
+        isLoading === false && <PagingToolbar pageNumber={activePageNumber} setPageNumber={setActivePageNumber}></PagingToolbar>
+      }
     </div>
   );
 }

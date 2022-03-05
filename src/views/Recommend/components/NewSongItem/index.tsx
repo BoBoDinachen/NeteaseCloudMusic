@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react";
-import { PlayOne} from '@icon-park/react';
+import { FunctionComponent, memo } from "react";
+import { PlayOne } from '@icon-park/react';
 
 interface NewSongItemProps {
   songItem: NewSongType
@@ -20,19 +20,19 @@ const NewSongItem: FunctionComponent<NewSongItemProps> = (props) => {
       <div className='relative'>
         <img className='w-14 rounded-sm' src={props.songItem.picUrl} alt="" />
         <button className='btn btn-circle btn-xs m-auto absolute top-0 left-0 bottom-0 right-0'>
-          <PlayOne theme="filled" size="14" fill="#ffffff"/>
+          <PlayOne theme="filled" size="14" fill="#ffffff" />
         </button>
       </div>
       {/* 右边部分 */}
       <div className='flex flex-col justify-between ml-3 py-1 space-y-2'>
         <div className='text-xs'>
           <span className='truncate w-max'>{props.songItem.name}</span>
-          <span className='truncate ml-1 text-gray-400'>{props.songItem.alias?`(${props.songItem.alias})`:''}</span>
+          <span className='truncate ml-1 text-gray-400'>{props.songItem.alias ? `(${props.songItem.alias})` : ''}</span>
         </div>
         <span className='text-xs text-gray-400'>{props.songItem.singer}</span>
       </div>
     </li>
   );
 }
- 
-export default NewSongItem;
+
+export default memo(NewSongItem);

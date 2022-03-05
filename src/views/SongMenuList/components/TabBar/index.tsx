@@ -23,8 +23,8 @@ const TabBar: FunctionComponent<TabBarProps> = (props) => {
   return (
     <div className='relative flex justify-between items-center my-3'>
       {/* 歌单分类按钮 */}
-      <button ref={btnRef} className='btn bordered btn-sm' onClick={() => { setShowTagListBox(true) }}>
-        <span className='text-gray-100'>{props.tagName}</span>
+      <button ref={btnRef} className='btn w-26 bordered btn-sm' onClick={() => { setShowTagListBox(true) }}>
+        <span className='text-gray-100 w-max overflow-hidden'>{props.tagName}</span>
         <Right theme="filled" size="20" fill="#ffffff" />
       </button>
       {/* 热门标签列表 */}

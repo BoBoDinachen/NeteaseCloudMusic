@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useRef, memo } from "react";
 import testImg from '~/assets/images/test.jpg';
 import { PlayOne, Play, User } from '@icon-park/react';
 import { unitConverter } from '~/utils/BaseUtil';
@@ -18,7 +18,7 @@ const SongMenu: FunctionComponent<SongMenuProps> = (props) => {
         <img style={{ filter: 'brightness(75%)' }}
           src={props.menuItem.picUrl ? props.menuItem.picUrl : props.menuItem.coverImgUrl}
           className='h-50 object-cover rounded-md'
-          onError={(e:any) => {e.target.onerror = null;e.target.src=testImg}}
+          onError={(e: any) => { e.target.onerror = null; e.target.src = testImg }}
           alt="" />
         {/* 显示播放按钮 */}
         <Play className={
@@ -26,15 +26,15 @@ const SongMenu: FunctionComponent<SongMenuProps> = (props) => {
         ${isHovering ? 'opacity-100' : 'opacity-0'}
         `
         }
-          theme="outline" size="26" fill="#ffffff" />
+          theme="outline" size="33" fill="#ffffff" />
         {/* 创建者 */}
-        <div style={{display: props.menuItem.creator?'flex':'none'}} className='absolute flex justify-start items-center bottom-2 left-2'>
+        <div style={{ display: props.menuItem.creator ? 'flex' : 'none' }} className='absolute flex justify-start items-center bottom-2 left-2'>
           <User theme="outline" size="15" fill="#ffffff" />
           <span className='text-xs ml-1'>{props.menuItem.creator?.nickname}</span>
         </div>
       </div>
       {/* 歌单名称 */}
-      <span style={{display:'-webkit-box',WebkitLineClamp: '2',WebkitBoxOrient:'vertical',overflow:'hidden',textOverflow:'ellipsis',}} className='text-sm text-gray-300  h-11 py-1  hover:text-white'>
+      <span style={{ display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', }} className='text-sm text-gray-300  h-11 py-1  hover:text-white'>
         {props.menuItem.name}
       </span>
       {/* 播放量 */}
@@ -46,4 +46,4 @@ const SongMenu: FunctionComponent<SongMenuProps> = (props) => {
   );
 }
 
-export default SongMenu;
+export default memo(SongMenu);
