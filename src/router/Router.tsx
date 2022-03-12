@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, RouteObject, useRoutes } from 'react-router-dom';
 
 import LayOut from '~/layout/index';
@@ -7,11 +7,17 @@ import Loading from '~/components/Loading/index';
 const Hello = lazy(() => import('~/views/Hello/index')); // 欢迎
 const Login = lazy(() => import('~/views/Login')); // 登录
 const FindMusic = lazy(() => import('~/views/FindMusic/index')); // 发现音乐
+const SingerList = lazy(() => import('~/views/SingerList/index')); // 歌手
+const SongMenuDetails = lazy(() => import('~/views/SongMenuDetails/index')); // 歌单详情
+
+
+/**
+ * 需要缓存的页面
+ */
 const Recommend = lazy(() => import('~/views/Recommend/index')); // 个性推荐
 const SongMenuList = lazy(() => import('~/views/SongMenuList/index')); // 歌单
 const RankingList = lazy(() => import('~/views/RankingList/index')); // 排行榜
-const SingerList = lazy(() => import('~/views/SingerList/index')); // 排行榜
-
+const NewSongList = lazy(() => import('~/views/NewSongList/index')); // 新歌列表
 
 export const Router = () => {
   /**
@@ -31,6 +37,7 @@ const InnerRouter = () => {
   const routes: RouteObject[] = [
     {
       path: '/',
+
       element: <LayOut />,
       children: [
         {
@@ -52,11 +59,18 @@ const InnerRouter = () => {
             {
               path: '/singerList',
               element: <SingerList />
+            },
+            {
+              path: '/newSongList',
+              element: <NewSongList />
             }
           ]
         },
         {
-          index: false,
+          path: "/songMenuDetails/:songMenuId",
+          element: <SongMenuDetails />
+        },
+        {
           path: "/hello",
           element: <Hello />
         },
@@ -69,5 +83,7 @@ const InnerRouter = () => {
   ]
   const element = useRoutes(routes);
 
-  return element
+  return (
+    element
+  )
 }

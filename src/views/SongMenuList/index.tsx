@@ -93,7 +93,7 @@ const SongMenuList: FunctionComponent<SongMenuListProps> = () => {
   }, [activeTag, activePageNumber])
 
   return (
-    <div ref={scrollBoxRef} className='w-full h-full px-20 pb-10 pt-5 overflow-hidden overflow-y-scroll'>
+    <div ref={scrollBoxRef} className='w-full flex-1 px-20 pb-10 pt-5 overflow-hidden overflow-y-scroll'>
       {/* 精品歌单封面 */}
       <BoutiqueCover boutiqueCover={activeBoutiqueCover} />
       {/* 歌单标签栏 */}

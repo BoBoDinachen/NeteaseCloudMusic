@@ -3,7 +3,13 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+/* 缓存组件容器 */
+.ka-wrapper{
+  overflow: hidden;
+}
+.ka-content{
+  overflow: hidden;
+}
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
   width: 4px;

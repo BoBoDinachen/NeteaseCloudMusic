@@ -57,11 +57,20 @@ function getBoutiquePlaylist(params: {cat:string,limit: number,before?:number}) 
   return get('/top/playlist/highquality', { ...params });
 }
 
+/**
+ * 获取歌单详情
+ * id : 歌单 id
+ * s : 歌单最近的 s 个收藏者,默认为 8
+ */
+function getSongListDetail(params: {id:number,s?:number}) {
+  return get('/playlist/detail', { ...params });
+}
 export {
   getSongListAllMusic,
   getSongCatlist,
   getHotSongCatlist,
   getBoutiquePlaylistTags,
   getBoutiquePlaylist,
-  getSongList
+  getSongList,
+  getSongListDetail
 }

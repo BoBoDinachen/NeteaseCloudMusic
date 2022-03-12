@@ -25,10 +25,11 @@ function getRecommendMV() {
 
 /**
  * 获取推荐新音乐
+ * @param limit 取出数量
  * @returns 
  */
-function getRecommendNewSong() {
-  return get('/personalized/newsong', {})
+function getRecommendNewSong(limit:number = 20) {
+  return get('/personalized/newsong', {limit})
 }
 
 /**

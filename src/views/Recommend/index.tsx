@@ -10,7 +10,6 @@ import NewSongItem from './components/NewSongItem';
 import SongMenuItem from '~/components/SongMenuItem'; // 歌单
 import MvItem from './components/MvItem';
 import TitleBar from './components/TitleBar/index';
-import { useRequest } from 'ahooks';
 
 interface RecommendProps {
 
@@ -140,7 +139,7 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
         status === 'loading' ? (
           <div>Loading...</div>
         ) : (
-          <ul className='w-full mt-5 grid grid-cols-5 gap-x-12 gap-y-5'>
+          <ul className='w-full mt-5 grid grid-cols-5 gap-x-5 gap-y-5'>
             {
               songMenuList.result.map((item: SongMenuType, index: any) => {
                 return (
@@ -184,4 +183,4 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
   );
 }
 
-export default Recommend;
+export default Recommend

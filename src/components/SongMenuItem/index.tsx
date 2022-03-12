@@ -4,6 +4,7 @@ import { PlayOne, Play, User } from '@icon-park/react';
 import { unitConverter } from '~/utils/BaseUtil';
 import { SongMenuType } from '~/types/index';
 import { useHover } from "ahooks";
+import { useNavigate } from 'react-router-dom';
 
 interface SongMenuProps {
   menuItem: SongMenuType
@@ -12,8 +13,20 @@ interface SongMenuProps {
 const SongMenu: FunctionComponent<SongMenuProps> = (props) => {
   const coverRef = useRef<HTMLImageElement>(null!);
   const isHovering = useHover(coverRef); // 是否悬浮图片
+  const navigate = useNavigate(); // 使用导航
+
+  /**
+   * 点击每个歌单
+   */
+  const handleClickMenuItem = (songMenuId: number) => {
+    navigate(`/songMenuDetails/${songMenuId}`);
+  }
+
   return (
-    <li className='flex flex-col justify-between w-50 h-50 relative cursor-pointer'>
+    <li
+      className='flex flex-col justify-between w-50 h-50 relative cursor-pointer'
+      onClick={() => { handleClickMenuItem(props.menuItem.id) }}
+    >
       <div ref={coverRef} className='relative'>
         <img style={{ filter: 'brightness(75%)' }}
           src={props.menuItem.picUrl ? props.menuItem.picUrl : props.menuItem.coverImgUrl}
@@ -45,5 +58,16 @@ const SongMenu: FunctionComponent<SongMenuProps> = (props) => {
     </li>
   );
 }
-
-export default memo(SongMenu);
+function areEqual(prevProps: any, nextProps: any) {
+  /*
+  如果把 nextProps 传入 render 方法的返回结果与
+  将 prevProps 传入 render 方法的返回结果一致则返回 true，
+  否则返回 false
+  */
+  if (prevProps === nextProps) {
+    return true;
+  } else {
+    return false;
+  }
+}
+export default memo(SongMenu, areEqual);

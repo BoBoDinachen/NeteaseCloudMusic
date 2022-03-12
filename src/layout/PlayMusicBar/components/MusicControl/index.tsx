@@ -1,12 +1,11 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from "react";
 import {
   useGetState,
   useToggle,
   useCreation,
   useUpdateEffect,
-  useCounter
 } from 'ahooks';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import Lyric from 'lyric-parser';
 // *************************************************  导入组件和hooks
 import { useAppContext } from '~/context/AppContext';
@@ -24,7 +23,7 @@ const MusicControl: FunctionComponent<MusicControlProps> = () => {
   // *********************************************状态
   const [totalSeconds, setTotalSeconds] = useState<number>(0); // 总的秒数
   const [seconds, setSeconds, getSeconds] = useGetState<number>(0); // 当前秒数
-  const [isPause, { toggle, setLeft, setRight }] = useToggle(); // 切换播放状态
+  const [isPause, { setLeft, setRight }] = useToggle(); // 切换播放状态
   const [playMode, setPlayMode] = useState<'order' | 'random' | 'loop'>('order'); // 当前的播放模式
   const { state, dispatch } = useAppContext(); // 全局状态
   const [musicUrl, setMusicUrl] = useState<string>(''); // 当前音乐资源的url

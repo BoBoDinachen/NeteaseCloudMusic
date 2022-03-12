@@ -3,9 +3,7 @@ import styles from './index.module.css';
 import { SettingTwo, Lock, Close } from '@icon-park/react';
 // *************************************** 导入组件和function
 import useBoxDrag from '~/hooks/useBoxDrag';
-import { getLyric } from '~/services/api/music';
 import { useAppContext } from '~/context/AppContext';
-import { useCreation, useUpdateEffect } from "ahooks";
 
 
 interface LyricProps {
