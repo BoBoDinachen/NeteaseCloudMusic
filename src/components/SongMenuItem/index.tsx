@@ -19,7 +19,7 @@ const SongMenu: FunctionComponent<SongMenuProps> = (props) => {
    * 点击每个歌单
    */
   const handleClickMenuItem = (songMenuId: number) => {
-    navigate(`/songMenuDetails/${songMenuId}`);
+    navigate(`/songMenuDetails/${songMenuId}/musicList`);
   }
 
   return (

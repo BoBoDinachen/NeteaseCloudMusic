@@ -53,7 +53,7 @@ const SideBar: FunctionComponent<SideBarProps> = () => {
             return (
               <li onClick={() => { handleClickMenu(item) }} key={index} className={`
                 flex items-center pl-2 transition duration-200 ease-in-out
-              hover:bg-gray-500 h-10 cursor-pointer rounded-md ${activeMenu === item ? 'text-lg font-bold' : ''}
+              hover:bg-gray-500 h-10 cursor-pointer rounded-sm ${activeMenu === item ? 'text-lg font-bold' : ''}
                 ${activeMenu === item ?'bg-gray-500':''}
               `
               }>{item}</li>

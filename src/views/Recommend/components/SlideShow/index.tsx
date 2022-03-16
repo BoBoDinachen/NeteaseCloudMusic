@@ -75,7 +75,6 @@ const SlideShow: FunctionComponent<SlideShowProps> = (props) => {
               <div key={key} className={`${styles.slide} ${styles[props.dir[key]?.name]}`}>
                 <img src={item.url} className='rounded-lg'></img>
                 {/* <span className={`text-xs p-1 w-max absolute right-0 text-center bg-indigo-700 ${dir[key].name === 'middle'?'-bottom-5':'bottom-0.5'}`}>{ item.title}</span> */}
-                {/* <div className={styles.masking}>{''}</div> */}
               </div>
             );
           })
@@ -95,11 +94,11 @@ const SlideShow: FunctionComponent<SlideShowProps> = (props) => {
           }
         </div>
         {/* 左侧按钮 */}
-        <div onClick={() => { pointFunc(--index.current) }} className='absolute top-0 bottom-0 left-12 m-auto z-40 btn border-0 btn-xs btn-circle bg-gray-500'>
+        <div onClick={() => { pointFunc(--index.current) }} className='absolute top-0 bottom-0 left-0 m-auto z-40 btn border-0 btn-xs btn-circle bg-gray-500'>
           <Left theme="outline" size="20" fill="#ffffff" />
         </div>
         {/* 右侧按钮 */}
-        <div onClick={() => { pointFunc(++index.current) }} className='absolute top-0 bottom-0 m-auto right-12 z-40 btn border-0 btn-xs btn-circle bg-gray-500'>
+        <div onClick={() => { pointFunc(++index.current) }} className='absolute top-0 bottom-0 m-auto right-0 z-40 btn border-0 btn-xs btn-circle bg-gray-500'>
           <Right theme="outline" size="20" fill="#ffffff" />
         </div>
       </div>

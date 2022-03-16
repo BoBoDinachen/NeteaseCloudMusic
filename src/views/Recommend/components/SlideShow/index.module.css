@@ -34,7 +34,7 @@
 
 /* // 第一张则为左侧那张 */
 .start {
-  left: 5%;
+  left: 0%;
   bottom: 0%;
   width: 35%;
   z-index: 22;
@@ -42,7 +42,7 @@
 
 /* // 最后一张及右侧那张 */
 .end {
-  right: 5%;
+  right: 0%;
   bottom: 0%;
   width: 35%;
   z-index: 22;

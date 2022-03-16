@@ -48,7 +48,7 @@ const SingerList: FunctionComponent<SingerListProps> = () => {
       {/* 歌手列表 */}
       {
         isLoading ? <Loading></Loading> :
-          <ul className="grid grid-cols-6 gap-x-5 gap-y-6 mt-10">
+          <ul className="grid grid-cols-6 gap-x-5 gap-y-6 mt-10 pb-10">
             {
               artistList.map((item, index) => {
                 return (

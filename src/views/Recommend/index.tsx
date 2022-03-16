@@ -130,7 +130,7 @@ const Recommend: FunctionComponent<RecommendProps> = () => {
   }, [])
 
   return (
-    <div className='px-28 py-5 w-full flex-1 flex flex-col justify-start items-center overflow-y-scroll overflow-hidden'>
+    <div className='px-24 py-5 w-full flex-1 flex flex-col justify-start items-center overflow-y-scroll overflow-hidden'>
       {/* 轮播图 */}
       <SlideShow imgUrlList={bannerUrlList!} dir={dir} setDir={setDir}></SlideShow>
       {/* 推荐歌单 */}

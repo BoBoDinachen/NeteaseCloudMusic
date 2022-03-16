@@ -15,7 +15,7 @@ interface NewSongType {
 
 const NewSongItem: FunctionComponent<NewSongItemProps> = (props) => {
   return (
-    <li className='flex rounded-sm justify-start items-center cursor-pointer hover:bg-gray-500 transition duration-150'>
+    <li className='flex rounded-sm justify-start items-center overflow-hidden cursor-pointer hover:bg-gray-500 transition duration-150'>
       {/* 歌曲封面 */}
       <div className='relative'>
         <img className='w-14 rounded-sm' src={props.songItem.picUrl} alt="" />
@@ -24,9 +24,9 @@ const NewSongItem: FunctionComponent<NewSongItemProps> = (props) => {
         </button>
       </div>
       {/* 右边部分 */}
-      <div className='flex flex-col justify-between ml-3 py-1 space-y-2'>
-        <div className='text-xs'>
-          <span className='truncate w-max'>{props.songItem.name}</span>
+      <div className='flex flex-col flex-1 truncate justify-between ml-3 py-1 space-y-2'>
+        <div className='text-xs overflow-hidden truncate w-full'>
+          <span className='truncate overflow-hidden w-max'>{props.songItem.name}</span>
           <span className='truncate ml-1 text-gray-400'>{props.songItem.alias ? `(${props.songItem.alias})` : ''}</span>
         </div>
         <span className='text-xs text-gray-400'>{props.songItem.singer}</span>

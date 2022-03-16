@@ -29,11 +29,15 @@ const unitConverter = (num: number) => {
   // 此处为防止字符串形式的数值进来，因为toFixed方法只能用于数值型数
   num = Number(num)
   if (Math.abs(num) > 100000000) {
-    return (num / 100000000).toFixed(2) + '亿'
+    return (num / 100000000).toFixed(0) + '亿'
   } else if (Math.abs(num) > 10000) {
-    return (num / 10000).toFixed(2) + '万'
-  } else {
-    return num.toFixed(2)
+    return (num / 10000).toFixed(0) + '万'
+  } else if (Math.abs(num) > 1000) {
+    return (num / 1000).toFixed(0) + '千'
+  }else if (Math.abs(num) > 100) {
+    return num
+  }else {
+    return num
   }
 }
 /**

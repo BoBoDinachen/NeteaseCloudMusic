@@ -9,6 +9,9 @@ const Login = lazy(() => import('~/views/Login')); // 登录
 const FindMusic = lazy(() => import('~/views/FindMusic/index')); // 发现音乐
 const SingerList = lazy(() => import('~/views/SingerList/index')); // 歌手
 const SongMenuDetails = lazy(() => import('~/views/SongMenuDetails/index')); // 歌单详情
+const MusicList = lazy(() => import('~/views/SongMenuDetails/components/MusicList/index')); // 歌单详情 --- 歌曲列表
+const CommentList = lazy(() => import('~/views/SongMenuDetails/components/CommentList/index')); // 歌单详情 --- 评论列表
+const CollectorList = lazy(() => import('~/views/SongMenuDetails/components/CollectorList/index')); // 歌单详情 --- 收藏者列表
 
 
 /**
@@ -68,7 +71,23 @@ const InnerRouter = () => {
         },
         {
           path: "/songMenuDetails/:songMenuId",
-          element: <SongMenuDetails />
+          element: <SongMenuDetails />,
+          children: [
+            {
+              index: true,
+              path: 'musicList',
+              element: <MusicList></MusicList>
+            },
+            {
+              path: 'commentList',
+              element: <CommentList></CommentList>
+            },
+            {
+              path: 'collectorList',
+              element: <CollectorList></CollectorList>
+            }
+          ]
+
         },
         {
           path: "/hello",
