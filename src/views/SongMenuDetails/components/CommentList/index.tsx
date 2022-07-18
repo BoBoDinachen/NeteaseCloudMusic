@@ -2,7 +2,9 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { getHotComment, getSongMenuComment } from '~/services/api/comment';
 import { useParams } from 'react-router-dom';
 import CommentItem from './CommentItem';
-import { Loading, Right } from "@icon-park/react";
+import { Right } from "@icon-park/react";
+import Pagination from '~/components/Pagination/index';
+import Loading from '~/components/Loading/index';
 
 interface CommentListProps {
 
@@ -27,26 +29,38 @@ const CommentList: FunctionComponent<CommentListProps> = () => {
   const [hotCommentList, setHotCommentList] = useState<CommentType[]>([]); // 精彩评论列表
   const [commentList, setCommentList] = useState<CommentType[]>([]); // 精彩评论列表
   const [totalComment, setTotalComment] = useState<number>(0); // 评论统计数量
-
-  const params = useParams();
+  const [currentPageNumber, setCurrentPageNumber] = useState<number>(1); // 当前页数
+  const [totalPageNumber, setTotalPageNumber] = useState<number>(0); // 总页数
+  const [loading, setLoading] = useState<boolean>(false); // 加载
+  const params = useParams(); // 路由参数
   /**
    * 加载热门评论和最新评论
    */
   useEffect(() => {
-    getSongMenuComment({ id: Number(params.songMenuId) }).then((res: any) => {
-      console.log(res);
-      if (res.code === 200) {
-        setCommentList(res.comments);
-        setTotalComment(res.total);
-      }
-    })
     getHotComment({ id: Number(params.songMenuId), type: 2, limit: 10 }).then((res: any) => {
       console.log(res);
       if (res.code === 200) {
         setHotCommentList(res.hotComments)
       }
     })
+
   }, [])
+
+  /**
+   * 分页加载最新评论
+   */
+  useEffect(() => {
+    setLoading(true);
+    getSongMenuComment({ id: Number(params.songMenuId), limit: 20, offset: (currentPageNumber - 1) * 20 }).then((res: any) => {
+      console.log(res);
+      if (res.code === 200) {
+        setCommentList(res.comments);
+        setTotalComment(res.total);
+        setTotalPageNumber(parseInt((res.total / 20) + ''));
+        setLoading(false);
+      }
+    })
+  }, [currentPageNumber])
 
   return (
     <div className="p-8">
@@ -89,27 +103,21 @@ const CommentList: FunctionComponent<CommentListProps> = () => {
         </li>
       </ul>
       {/* 最新评论列表 */}
-      <ul className="w-full flex flex-col justify-start items-start mt-6">
+      <ul className="w-full flex flex-col justify-start items-start mt-6 pb-14 relative">
         <li className="font-bold text-lg">最新评论({totalComment})</li>
         {
-          commentList.length !== 0 ?
-            commentList.map((item, index) => {
-              return (
-                <CommentItem commentItem={item} key={item.time} timeType={1}></CommentItem>
-              )
-            }) :
-            <h3 className="w-full text-center">暂无评论...</h3>
+          loading ? <Loading></Loading> :
+            commentList.length !== 0 ?
+              commentList.map((item, index) => {
+                return (
+                  <CommentItem commentItem={item} key={item.time} timeType={1}></CommentItem>
+                )
+              }) :
+              <h3 className="w-full text-center">暂无评论...</h3>
         }
-        <div className="btn-group w-full flex justify-center mt-5">
-          <button className="btn">«</button>
-          <button className="btn">1</button>
-          <button className="btn">2</button>
-          <button className="btn btn-disabled">...</button>
-          <button className="btn">99</button>
-          <button className="btn">100</button>
-          <button className="btn">»</button>
-        </div>
       </ul>
+      {/* 分页 */}
+      <Pagination activePage={currentPageNumber} setActivePage={setCurrentPageNumber} totalPage={totalPageNumber == 0 ? 1 : totalPageNumber}></Pagination>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const getSongMenuComment = (params: {id: number,limit?: number,offset?: number,b
 }
 
 /**
- * 
+ * **获取热门评论**
  * @param params 参数
  * * id : 资源 id
  * * type: 数字 , 资源类型 , 对应0-歌曲 , 1-mv, 2-歌单 ,3-专辑, 4-电台, 5-视频对应以下类型

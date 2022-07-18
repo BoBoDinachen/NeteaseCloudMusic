@@ -1,10 +1,10 @@
-import { Download, Like } from "@icon-park/react";
+import { Download, Like, MusicOne } from "@icon-park/react";
 import { FunctionComponent, useEffect, useState } from "react";
 import { getSongListAllMusic } from '~/services/api/songList';
 import { useParams } from 'react-router-dom';
 import { formatDuring } from '~/utils/BaseUtil';
 import Loading from '~/components/Loading/index';
-import {useAppContext} from '~/context/AppContext';
+import { useAppContext } from '~/context/AppContext';
 
 interface MusicListProps {
 
@@ -23,7 +23,7 @@ const MusicList: FunctionComponent<MusicListProps> = () => {
   const params = useParams();
   const [musicListData, setMusicListData] = useState<MusicDataType[]>([]); // 歌曲列表数据
   const [loading, setLoading] = useState<boolean>(false); // 加载状态
-  const { state,dispatch} = useAppContext();
+  const { state, dispatch } = useAppContext();
   /**
    * 获取歌单内所有的歌曲
    */
@@ -41,10 +41,11 @@ const MusicList: FunctionComponent<MusicListProps> = () => {
   /**
    * 鼠标双击每个item
    */
-  const handleClickItem = (id:number) => { 
+  const handleClickItem = (id: number) => {
     dispatch({ type: 'setPlaySoundId', playload: id });
     dispatch({ type: 'setAutoPlay', playload: true });
   }
+
   return (
     <div className="flex flex-col w-full justify-start mt-5 text-gray-400 text-sm">
       {/* 标题栏 */}
@@ -68,17 +69,22 @@ const MusicList: FunctionComponent<MusicListProps> = () => {
                   hover:bg-gray-500
                   cursor-pointer
                 `}
-                  onDoubleClick={() => { handleClickItem(item.id)}}
+                  onDoubleClick={() => { handleClickItem(item.id) }}
                   key={item.id}>
-                  <span style={{ flex: 1 }} className='text-center'>{(index + 1).toString().length === 1 ? '0' + (index + 1) : index + 1}</span>
+                  {
+                    state.playSoundId === item.id ?
+                      <MusicOne style={{ flex: 1 }} className='' theme="outline" size="24" fill="#ffffff" strokeWidth={2} />
+                      :
+                      <span style={{ flex: 1 }} className='text-center'>{(index + 1).toString().length === 1 ? '0' + (index + 1) : index + 1}</span>
+                  }
                   <span style={{ flex: 1 }} className='flex items-center px-2 space-x-2'>
                     {
-                      false ? <Like theme="outline" size="20" fill="#9ca3af" strokeWidth={2} /> :
+                      true ? <Like theme="outline" size="20" fill="#9ca3af" strokeWidth={2} /> :
                         <Like theme="filled" size="20" fill="#d0021b" strokeWidth={2} />
                     }
                     <Download theme="outline" size="20" fill="#9ca3af" strokeWidth={2} />
                   </span>
-                  <span style={{ flex: 4 }} className='px-2 truncate text-gray-200'>{item.name}<span className="ml-2 text-gray-400">{item.alia[0] === undefined?'':`(${item.alia[0]})`}</span></span>
+                  <span style={{ flex: 4 }} className='px-2 truncate text-gray-200'>{item.name}<span className="ml-2 text-gray-400">{item.alia[0] === undefined ? '' : `(${item.alia[0]})`}</span></span>
                   <span style={{ flex: 3 }} className='truncate px-2'>{
                     item.ar.map((arItem, index) => {
                       if (index !== item.ar.length - 1) {
